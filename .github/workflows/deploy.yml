@@ -1,0 +1,52 @@
+name: CI/CD for IssueApp
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v3
+
+      - name: Javaをセットアップ
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 依存関係のインストール
+        run: ./gradlew clean build
+
+      - name: ビルド成果物を圧縮
+        run: zip -j build/libs/issueapp.zip build/libs/issueapp-0.0.1-SNAPSHOT.jar
+
+      - name: AWS CLIのインストール
+        run: sudo apt-get install -y awscli
+
+      - name: AWS認証設定
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: aws configure set region ${{ secrets.AWS_REGION }}
+
+      - name: JARファイルをS3にアップロード
+        run: aws s3 cp build/libs/issueapp.zip s3://elasticbeanstalk-$AWS_REGION-$ACCOUNT_ID/issueapp.zip
+
+      - name: アプリケーションバージョン作成
+        run: |
+          aws elasticbeanstalk create-application-version \
+            --application-name ${{ secrets.EB_APP_NAME }} \
+            --version-label v1.0.$GITHUB_RUN_NUMBER \
+            --source-bundle S3Bucket=elasticbeanstalk-${{ secrets.AWS_REGION }}-$ACCOUNT_ID,S3Key=issueapp.zip
+
+      - name: 環境更新
+        run: |
+          aws elasticbeanstalk update-environment \
+            --application-name ${{ secrets.EB_APP_NAME }} \
+            --environment-name ${{ secrets.EB_ENV_NAME }} \
+            --version-label v1.0.$GITHUB_RUN_NUMBER
