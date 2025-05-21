@@ -40,12 +40,12 @@ IssueApp(イシュー管理アプリ)
 |ページ|説明|
 |---|---|
 |<img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2RpOG1rMW1vdHc3ZGl4aWNuNDd1bXk0d21pMnZnMXNvZmN2MHg4YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ot01otzlOYFr0QXy0p/giphy.gif" width="300"/>|新規作成ページ<br> イシューのタイトル、内容、対応期限、重要度を入力し、新しいイシューを登録します。|
-|<img src="#" width="300"/>|ユイシュー一覧ページ<br>登録されているすべてのイシューを一覧表示します。ここから各イシューの詳細、更新、削除が可能です。|
-|<img src="#" width="300"/>|イシュー詳細・更新ページ<br>特定のイシューの全詳細情報を確認し、内容を編集して更新することができます。|
+|<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExenZyc3I0a2E1bXVpZzVkOWRvcWt4dWtlbTl6MjUxMnhyd3MzeWlsOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/gjGcA369GfVYPA02b7/giphy.gif" width="300"/>|ユイシュー一覧ページ<br>登録されているすべてのイシューを一覧表示します。ここから各イシューの詳細、更新、削除が可能です。|
+|<img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNW1scXU1djZ3YWc0Y2FvMjVyYjRmazZnam84ODIzZ21qaHp1M2xkYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/81xMzvoZjJRTOpYeQ4/giphy.gif" width="300"/>|イシュー詳細・更新ページ<br>特定のイシューの全詳細情報を確認し、内容を編集して更新することができます。|
 
 
 ## 実装予定の機能
-
+・ イシューのステータス管理（例: 未着手、対応中、完了、クローズ）
 
 ## データベース設計
 ![ER図]()
